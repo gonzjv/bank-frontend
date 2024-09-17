@@ -1,4 +1,36 @@
+import { useRef } from "react";
+
 function FormLogin() {
+    const inputName = useRef();
+    const inputDescription = useRef();
+
+    const createUserJson = () => {
+        const user = {
+            email: inputName.current,
+            password: inputDescription.current
+        };
+        return JSON.stringify(user);
+    }
+    async function loginUser(reqJson) {
+        const myHeaders = new Headers();
+        myHeaders.append("Content-Type", "application/json");
+        
+        const options = {
+            headers: myHeaders,
+            method : "POST",
+            body: reqJson
+        };
+        
+        const res = await fetch("http://localhost:8080/user/login", options);
+        const json = await res.json();
+        console.log(json); 
+    
+        return json;
+    };
+
+    function handleBtnClick() {
+        loginUser(createUserJson());
+    }
     return (
         <form className="p-10 flex flex-col items-end gap-8 shadow-xl rounded-lg shadow-yellow-200 bg-slate-900">
             <div className="flex justify-center items-center gap-3">
@@ -24,7 +56,7 @@ function FormLogin() {
                     
                     }} type="text" name="name" placeholder="password..."/>
             </div>
-            <button onClick={() => {}}
+            <button onClick={() => handleBtnClick()}
                     className="flex justify-center items-center 
                     w-[15vw] h-[7vh] rounded-full text-slate-600 
                     border-2 border-slate-200
