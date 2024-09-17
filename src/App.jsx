@@ -8,7 +8,7 @@ function App() {
   const [count, setCount] = useState(0)
 
   return (
-   <div className='min-h-[100vh] font-["Lusitana"]'>
+   <div className='min-h-[100vh] font-["Lusitana"] text-2xl bg-slate-900'>
     <Header/>
     <Outlet/>
     <Footer/>
