@@ -1,6 +1,6 @@
 const Home = () => {
     return (
-        <main>
+        <main className="bg-green-300">
             Home
         </main>
     )
