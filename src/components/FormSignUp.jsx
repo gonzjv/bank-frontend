@@ -1,3 +1,4 @@
+import { useRef, useState } from "react";
 import { Link } from "react-router-dom";
 
 
@@ -5,6 +6,8 @@ function FormSignUp() {
     const inputEmail = useRef();
     const inputName = useRef();
     const inputPassword = useRef();
+    const [message, setMessage] = useState("");
+    const [msgColor, setMsgColor] = useState("");
 
     const createUserJson = () => {
         const user = {
@@ -14,7 +17,7 @@ function FormSignUp() {
         };
         return JSON.stringify(user);
     }
-    async function loginUser(reqJson) {
+    async function signUpUser(reqJson) {
         const myHeaders = new Headers();
         myHeaders.append("Content-Type", "application/json");
         console.log("reqJson", reqJson);
@@ -25,19 +28,32 @@ function FormSignUp() {
             body: reqJson
         };
         
-        const res = await fetch("http://localhost:3000/api/v1/user/login", options);
+        const res = await fetch("http://localhost:3000/api/v1/user/signup", options);
         const json = await res.json();
-        console.log(json); 
+        console.log(json);
+        
+        if (res.ok) {
+            setMsgColor("text-green-500");
+        } else {
+            setMsgColor("text-red-500");
+        }
     
         return json;
     };
 
-    function handleBtnClick() {
-        loginUser(createUserJson());
+    async function handleBtnClick() {
+        const json = await signUpUser(createUserJson());
+
+        // if (await res.status == 200) {
+        //     setMsgColor("green-500");
+        // } else {
+        //     setMsgColor("red-500");
+        // }
+        setMessage(json);
     }
 
     return (
-        <form className="border-2 p-10 flex flex-col items-end gap-8 shadow-md rounded-lg shadow-yellow-200 bg-slate-900">
+        <form className="relative border-2 px-10 py-20 flex flex-col items-end gap-8 shadow-md rounded-lg shadow-yellow-200 bg-slate-900">
             <div className="flex justify-center items-center gap-3">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="size-6">
                     <path strokeLinecap="round" strokeLinejoin="round" d="M12 21a9.004 9.004 0 0 0 8.716-6.747M12 21a9.004 9.004 0 0 1-8.716-6.747M12 21c2.485 0 4.5-4.03 4.5-9S14.485 3 12 3m0 18c-2.485 0-4.5-4.03-4.5-9S9.515 3 12 3m0 0a8.997 8.997 0 0 1 7.843 4.582M12 3a8.997 8.997 0 0 0-7.843 4.582m15.686 0A11.953 11.953 0 0 1 12 10.5c-2.998 0-5.74-1.1-7.843-2.918m15.686 0A8.959 8.959 0 0 1 21 12c0 .778-.099 1.533-.284 2.253m0 0A17.919 17.919 0 0 1 12 16.5c-3.162 0-6.133-.815-8.716-2.247m0 0A9.015 9.015 0 0 1 3 12c0-1.605.42-3.113 1.157-4.418" />
@@ -45,8 +61,8 @@ function FormSignUp() {
                 <input
                 className="bg-slate-700 h-14 border-2 rounded-md px-6"
                 onChange={(e) => {
-                    inputName.current = e.target.value;
-                    console.log("name:", inputName.current)
+                    inputEmail.current = e.target.value;
+                    console.log("name:", inputEmail.current)
                     
                     }} type="text" name="name" placeholder="email..."/>
             </div>
@@ -88,6 +104,7 @@ function FormSignUp() {
                 >Sign Up
                 </button>
             </nav>
+            <aside className={`${msgColor} absolute bottom-0 transition-all duration-500`}>{message}</aside>
 
         </form>
     );
