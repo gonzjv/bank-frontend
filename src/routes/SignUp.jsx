@@ -2,15 +2,14 @@ import FormSignUp from "../components/FormSignUp.jsx";
 
 function SignUp() {
     return (
-        <main className="min-h-[86vh] flex items-center">
-            <section 
-            className="h-full flex justify-center items-center min-w-[50vw] bg-center bg-no-repeat
-            bg-[url('/bg-home.png')]">
+        <main className="min-h-[86vh] flex items-center ">
+            <section className="flex justify-center min-w-[33vw]">
+                <img src="/circle.png" alt="" />
             </section>
-            <section>
-                <FormSignUp/>
+            <FormSignUp/>
+            <section className="flex justify-center min-w-[33vw]">
+                <img src="/rectangle.png" alt="" />
             </section>
-            <section></section>
         </main>
 
     );
