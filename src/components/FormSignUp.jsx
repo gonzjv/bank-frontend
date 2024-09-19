@@ -33,7 +33,7 @@ function FormSignUp() {
         console.log(json);
         
         if (res.ok) {
-            setMsgColor("text-green-500");
+            setMsgColor("text-lime-500");
         } else {
             setMsgColor("text-red-500");
         }
@@ -44,11 +44,6 @@ function FormSignUp() {
     async function handleBtnClick() {
         const json = await signUpUser(createUserJson());
 
-        // if (await res.status == 200) {
-        //     setMsgColor("green-500");
-        // } else {
-        //     setMsgColor("red-500");
-        // }
         setMessage(json);
     }
 
@@ -104,7 +99,7 @@ function FormSignUp() {
                 >Sign Up
                 </button>
             </nav>
-            <aside className={`${msgColor} absolute bottom-0 transition-all duration-500`}>{message}</aside>
+            <aside className={`${msgColor} absolute bottom-6 transition-all duration-500`}>{message}</aside>
 
         </form>
     );
