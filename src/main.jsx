@@ -5,6 +5,7 @@ import App from './App.jsx'
 import './index.css'
 import Home from './routes/Home.jsx'
 import SignUp from './routes/SignUp.jsx'
+import Confirmation from './routes/Confirmation.jsx'
 
 const router = createBrowserRouter([
     {
@@ -18,6 +19,10 @@ const router = createBrowserRouter([
         {
           path: "/signup",
           element: <SignUp/>
+        },
+        {
+          path: "/confirmation",
+          element: <Confirmation/>
         }
       ]
     }

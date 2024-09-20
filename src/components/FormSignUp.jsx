@@ -1,5 +1,5 @@
 import { useRef, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 
 function FormSignUp() {
@@ -8,6 +8,7 @@ function FormSignUp() {
     const inputPassword = useRef();
     const [message, setMessage] = useState("");
     const [msgColor, setMsgColor] = useState("");
+    const navigate = useNavigate();
 
     const createUserJson = () => {
         const user = {
@@ -42,9 +43,10 @@ function FormSignUp() {
     };
 
     async function handleBtnClick() {
-        const json = await signUpUser(createUserJson());
+        //const json = await signUpUser(createUserJson());
+        navigate("/confirmation");
 
-        setMessage(json);
+        //setMessage(json);
     }
 
     return (
