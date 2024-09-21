@@ -43,7 +43,8 @@ function FormSignUp() {
     };
 
     async function handleBtnClick() {
-        //const json = await signUpUser(createUserJson());
+        const json = await signUpUser(createUserJson());
+        localStorage.setItem("userEmail", inputEmail.current);
         navigate("/confirmation");
 
         //setMessage(json);

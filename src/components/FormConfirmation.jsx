@@ -7,8 +7,8 @@ const FormConfirmation = () => {
 
     const createConfirmationJson = () => {
         return JSON.stringify({
+            email: localStorage.getItem("userEmail"),
             code: inputCode.current,
-            userEmail: "email"
         });
     }
 
