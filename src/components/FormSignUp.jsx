@@ -43,11 +43,20 @@ function FormSignUp() {
     };
 
     async function handleBtnClick() {
-        const json = await signUpUser(createUserJson());
-        localStorage.setItem("userEmail", inputEmail.current);
-        navigate("/confirmation");
+        if (isFormFullfilled()) {
+            const json = await signUpUser(createUserJson());
+            localStorage.setItem("userEmail", inputEmail.current);
+            navigate("/confirmation");
+        } else {
+            setMsgColor("text-yellow-300");
+            setMessage("* Form should be filled");
+        }
 
-        //setMessage(json);
+    }
+
+    function isFormFullfilled() {
+        return inputEmail.current != null && inputName.current != null && 
+            inputPassword != null
     }
 
     return (
