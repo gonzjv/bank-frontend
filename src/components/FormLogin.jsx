@@ -1,9 +1,11 @@
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { Link } from "react-router-dom";
 
 function FormLogin() {
-    const inputName = useRef();
-    const inputPassword = useRef();
+    const inputName = useRef("");
+    const inputPassword = useRef("");
+    const [message, setMessage] = useState("");
+    const [msgColor, setMsgColor] = useState("");
 
     const createUserJson = () => {
         const user = {
@@ -24,6 +26,12 @@ function FormLogin() {
         };
         
         const res = await fetch("http://localhost:3000/api/v1/user/login", options);
+        
+        if (false == res.ok) {
+            setMsgColor("text-red-400");
+            setMessage("* Email / password is incorrect");
+        }
+        
         const json = await res.json();
         console.log(json); 
     
@@ -31,10 +39,15 @@ function FormLogin() {
     };
 
     function handleBtnClick() {
-        loginUser(createUserJson());
+        if ("" == inputName.current || "" == inputPassword.current) {
+            setMsgColor("text-yellow-200");
+            setMessage("* fill both email and password fields");           
+        } else {
+            loginUser(createUserJson());
+        }
     }
     return (
-        <form className="p-10 flex flex-col items-end gap-8 shadow-xl rounded-lg shadow-yellow-200 bg-slate-900">
+        <form className="relative border-2 border-slate-100 px-10 py-20 flex flex-col items-end gap-8 shadow-xl rounded-lg shadow-yellow-200 bg-slate-900">
             <div className="flex justify-center items-center gap-3">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="size-6">
                     <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z" />
@@ -72,6 +85,11 @@ function FormLogin() {
                 >Log In
                 </button>
             </nav>
+            <aside className="absolute bottom-5 duration-500 transition-all">
+                <p className={`${msgColor}`}>
+                    {message}
+                </p>
+            </aside>
 
         </form>
     )
