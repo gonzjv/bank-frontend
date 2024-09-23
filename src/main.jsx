@@ -6,6 +6,7 @@ import './index.css'
 import Home from './routes/Home.jsx'
 import SignUp from './routes/SignUp.jsx'
 import Confirmation from './routes/Confirmation.jsx'
+import DashboardRoute from './routes/DashboardRoute.jsx'
 
 const router = createBrowserRouter([
     {
@@ -23,6 +24,10 @@ const router = createBrowserRouter([
         {
           path: "/confirmation",
           element: <Confirmation/>
+        },
+        {
+          path: "/dashboard",
+          element: <DashboardRoute/>
         }
       ]
     }

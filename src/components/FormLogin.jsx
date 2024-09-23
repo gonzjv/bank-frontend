@@ -1,11 +1,12 @@
 import { useRef, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 function FormLogin() {
     const inputName = useRef("");
     const inputPassword = useRef("");
     const [message, setMessage] = useState("");
     const [msgColor, setMsgColor] = useState("");
+    const navigate = useNavigate();
 
     const createUserJson = () => {
         const user = {
@@ -34,8 +35,8 @@ function FormLogin() {
         
         const json = await res.json();
         console.log(json); 
-    
-        return json;
+        
+        navigate("/dashboard");
     };
 
     function handleBtnClick() {
