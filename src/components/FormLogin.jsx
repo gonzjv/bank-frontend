@@ -31,12 +31,11 @@ function FormLogin() {
         if (false == res.ok) {
             setMsgColor("text-red-400");
             setMessage("* Email / password is incorrect");
+        } else {
+            const json = await res.json();
+            console.log(json); 
+            navigate("/dashboard");
         }
-        
-        const json = await res.json();
-        console.log(json); 
-        
-        navigate("/dashboard");
     };
 
     function handleBtnClick() {
