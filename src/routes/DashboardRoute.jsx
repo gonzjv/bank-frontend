@@ -42,14 +42,35 @@ const DashboardRoute = () => {
     return (
         <main className="p-8 min-h-[86vh] flex flex-col gap-8 bg-right-bottom bg-no-repeat bg-[url('/bg-dashboard.png')]">
             <h2 className="text-3xl">Dashboard</h2>
-            <div>{JSON.stringify(userData)}</div>
             <section className="flex gap-3">
                 <h3>
                     Balance:
                 </h3>
-                <p className="text-yellow-200">12345₪</p>
+                <p className="text-yellow-200">{userData?.account.balance}₪</p>
             </section>
-            <section>Transactions history:</section>
+            <section>
+                <h3>
+                    Transactions history:
+                </h3>
+                <ul>
+                    {
+                        userData?.account.transactions.map((elem) =>
+                            <li className="flex gap-3">
+                                <div>
+                                    {elem?.date}
+                                </div>
+                                <div>
+                                    {elem?.from}
+                                </div>
+                                <span>---</span>
+                                <div>
+                                    {elem?.to}
+                                </div>
+                            </li>
+                        )
+                    }
+                </ul>
+            </section>
         </main>
     )
 }
