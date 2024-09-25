@@ -1,16 +1,18 @@
-import { useRef, useState } from "react";
+import { useContext, useRef, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import AppContext from "../context/AppContext.js";
 
 function FormLogin() {
-    const inputName = useRef("");
+    const inputEmail = useRef("");
     const inputPassword = useRef("");
     const [message, setMessage] = useState("");
     const [msgColor, setMsgColor] = useState("");
     const navigate = useNavigate();
+    const {state, setState} = useContext(AppContext);
 
     const createUserJson = () => {
         const user = {
-            email: inputName.current,
+            email: inputEmail.current,
             password: inputPassword.current
         };
         return JSON.stringify(user);
@@ -33,13 +35,14 @@ function FormLogin() {
             setMessage("* Email / password is incorrect");
         } else {
             const json = await res.json();
-            console.log(json); 
+            console.log(json);
+            setState({...state, userName: json.userName, token: json.token}); 
             navigate("/dashboard");
         }
     };
 
     function handleBtnClick() {
-        if ("" == inputName.current || "" == inputPassword.current) {
+        if ("" == inputEmail.current || "" == inputPassword.current) {
             setMsgColor("text-yellow-200");
             setMessage("* fill both email and password fields");           
         } else {
@@ -55,8 +58,8 @@ function FormLogin() {
                 <input
                 className="h-14 border-2 rounded-md px-6"
                 onChange={(e) => {
-                    inputName.current = e.target.value;
-                    console.log("name:", inputName.current)
+                    inputEmail.current = e.target.value;
+                    console.log("name:", inputEmail.current)
                     
                     }} type="text" name="name" placeholder="email..."/>
             </div>
