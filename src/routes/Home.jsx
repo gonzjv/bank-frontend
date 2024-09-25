@@ -1,6 +1,7 @@
 import { useContext } from "react";
 import FormLogin from "../components/FormLogin.jsx";
 import AppContext from "../context/AppContext.js";
+import { Link } from "react-router-dom";
 
 const Home = () => {
     const {state} = useContext(AppContext);
@@ -17,7 +18,10 @@ const Home = () => {
                     <h3 className="text-4xl font-bold">
                         Hi, dear {state?.userName}!
                     </h3>
-                    <p>Look at your</p>    
+                    <div className="flex gap-3">
+                        <p>Look at your</p>
+                        <Link className="underline" to={"/dashboard"}>dashboard</Link>    
+                    </div>
                 </div>
             }
             </section>

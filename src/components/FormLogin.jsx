@@ -36,7 +36,12 @@ function FormLogin() {
         } else {
             const json = await res.json();
             console.log(json);
-            setState({...state, userName: json.userName, token: json.token}); 
+            setState({
+                ...state,
+                 userName: json.userName,
+                 token: json.token,
+                 email: inputEmail.current
+            }); 
             navigate("/dashboard");
         }
     };
