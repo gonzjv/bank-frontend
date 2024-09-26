@@ -10,7 +10,7 @@ const Header = () => {
         <header className="flex justify-between px-6 items-center h-[7vh]
          w-[100vw] border-b-yellow-200 border-b-4 bg-slate-700">
             <Link to={"/"}>
-                <h1 className="text-5xl font-bold">Fair Bank</h1>
+                <h1 className="text-5xl font-bold bg-gradient-to-r from-white  to-lime-300 bg-clip-text text-transparent">Fair Bank</h1>
             </Link>
             <nav>
                 {
