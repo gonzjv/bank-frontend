@@ -1,5 +1,6 @@
 import { useContext, useEffect, useState } from "react";
 import AppContext from "../context/AppContext.js";
+import FormTransaction from "../components/FormTransaction.jsx";
 
 const DashboardRoute = () => {
     const [userData, setUserData] = useState();
@@ -29,9 +30,6 @@ const DashboardRoute = () => {
             setUserData(json); 
         };
             
-            /* 
-        */
-        
         getUserData();
         console.log("userData:", userData);
     }, []);
@@ -43,21 +41,11 @@ const DashboardRoute = () => {
         });
     };
 
-    const handleCloseBtnClick = () => {
-        setState({
-            ...state,
-            showTransaction: false
-        });
-    };
-
-
     return (
         <div>
             {
                 state?.showTransaction ? 
-                    <aside className="z-20 absolute w-32 h-32 bg-green-400">
-                        <button onClick={handleCloseBtnClick}>Close</button>
-                    </aside>
+                    <FormTransaction/>
                     :
                     false
             }
@@ -80,21 +68,27 @@ const DashboardRoute = () => {
                         <button onClick={handleTransactionBtnClick} className="font-bold bg-gradient-to-r from-yellow-300 via-orange-300 to-lime-300 bg-clip-text text-transparent"> make transaction</button>
                     </div>
                 </section>
-                <section>
+                <section className="border-2 border-lime-100 rounded-md p-10 flex flex-col gap-6">
                     <h3>
                         Transactions history:
                     </h3>
                     <ul>
                         {
                             userData?.account.transactions.map((elem) =>
-                                <li className="flex gap-3">
+                                <li key={elem?.date} className="flex gap-3 items-center">
                                     <div>
-                                        {elem?.date}
+                                        {elem?.date.slice(0, 19)}
                                     </div>
+                                    <span>---</span>
                                     <div>
                                         {elem?.from}
                                     </div>
-                                    <span>---</span>
+                                    <svg xmlns="http://www.w3.org/2000/svg"
+                                    fill="none" viewBox="0 0 24 24"
+                                    strokeWidth={1.5} stroke="currentColor"
+                                    className="size-6 text-yellow-200">
+                                        <path strokeLinecap="round" strokeLinejoin="round" d="m5.25 4.5 7.5 7.5-7.5 7.5m6-15 7.5 7.5-7.5 7.5" />
+                                    </svg>
                                     <div>
                                         {elem?.to}
                                     </div>
