@@ -53,13 +53,13 @@ const DashboardRoute = () => {
                 ${state?.showTransaction ? "blur-sm" : ""} 
                 p-8 min-h-[86vh] flex flex-col gap-8 bg-right-bottom bg-no-repeat
                  bg-[url('/bg-dashboard.png')]`}>
-                <h2 className="text-3xl">Dashboard</h2>
+                <h2 className="text-3xl font-bold">Dashboard</h2>
                 <section className="flex gap-10 items-center">
                     <div className="flex gap-3">
                         <h3>
                             Balance:
                         </h3>
-                        <p className="text-yellow-200">{userData?.account.balance}₪</p>
+                        <p className="text-yellow-200">{userData?.account.balance.toPrecision(4)}₪</p>
                     </div>
                     <div className="flex items-center gap-3">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6 text-yellow-200">
@@ -91,6 +91,10 @@ const DashboardRoute = () => {
                                     </svg>
                                     <div>
                                         {elem?.to}
+                                    </div>
+                                    <span>---</span>
+                                    <div className="font-bold bg-gradient-to-r from-white via-yellow-300 to-lime-300 bg-clip-text text-transparent">
+                                        {elem?.amount} ₪
                                     </div>
                                 </li>
                             )
