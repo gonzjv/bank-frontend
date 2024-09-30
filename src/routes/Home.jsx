@@ -5,13 +5,16 @@ import { Link } from "react-router-dom";
 
 const Home = () => {
     const {state} = useContext(AppContext);
+    //className="flex justify-center items-center min-w-[50vw] bg-center bg-no-repeat
+     //bg-[url('/bg-home.png')]">
 
     return (
-        <main className="min-h-[86vh] flex" >
+        <main className="min-h-[86vh] flex items-center" >
             <section 
-            className="flex justify-center items-center min-w-[50vw] bg-center bg-no-repeat
-             bg-[url('/bg-home.png')]">
-            {
+            className="flex justify-center items-center min-w-[50vw] h-[70vh] 
+            bg-gradient-to-r from-orange-200 via-yellow-320 rounded-3xl to-lime-300
+            bg-300% animate-gradient">
+             {
                 null == state ?
                 <FormLogin/> :
                 <div>
