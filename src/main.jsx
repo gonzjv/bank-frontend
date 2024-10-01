@@ -7,6 +7,8 @@ import Home from './routes/Home.jsx'
 import SignUp from './routes/SignUp.jsx'
 import Confirmation from './routes/Confirmation.jsx'
 import DashboardRoute from './routes/DashboardRoute.jsx'
+import AboutRoute from './routes/AboutRoute.jsx'
+import BranchesRoute from './routes/BranchesRoute.jsx'
 
 const router = createBrowserRouter([
     {
@@ -28,7 +30,15 @@ const router = createBrowserRouter([
         {
           path: "/dashboard",
           element: <DashboardRoute/>
-        }
+        },
+        {
+          path: "/about",
+          element: <AboutRoute/>
+        },
+        {
+          path: "/branches",
+          element: <BranchesRoute/>
+        },
       ]
     }
   ]
